@@ -29,7 +29,9 @@ func (s *APIServer) Run() error {
 	// handles our api prefix for different versions
 	subrouter := router.PathPrefix("/api/v1").Subrouter()
 	// user service
-	userHandler := user.NewHandler()
+	// dependency injection
+	userStore := user.NewStore(s.db)
+	userHandler := user.NewHandler(userStore)
 	userHandler.RegisterRoutes(subrouter)
 	log.Println("listening on : ", s.addr)
 	return http.ListenAndServe(s.addr, router)

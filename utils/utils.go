@@ -8,7 +8,9 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
-// Reusable functions
+// This function holds the logic for all the reusable functions in the application
+// for example converting the request body to a JSON object, writing JSON response
+
 func ParseJSON(r *http.Request, payload interface{}) error {
 	if r.Body == nil {
 		return fmt.Errorf("missing request body")
@@ -30,5 +32,5 @@ func WriteError(w http.ResponseWriter, status int, err error) {
 
 }
 
-// singleton to avid creating multiple instances of the validator
+// singleton to avoid creating multiple instances of the validator
 var Validate = validator.New()

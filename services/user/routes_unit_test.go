@@ -2,11 +2,11 @@ package user
 
 import (
 	"bytes"
-	"ecom/db"
+
 	"ecom/types"
 	"encoding/json"
+	"fmt"
 
-	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -15,22 +15,9 @@ import (
 )
 
 // on the terminal we can run  go test -v ./... to run all the tests in the application
-func TestUserServiceHandlers(t *testing.T) {
-
-	cfg := db.PgConfig{
-		User:     "postgres",   //configs.Envs.DbUser,
-		Password: "0845635040", //configs.Envs.DBPassword,
-		Host:     "localhost",  //configs.Envs.DBAddress,
-		Port:     5432,         // PostgreSQL default port
-		DBName:   "postgres",   //configs.Envs.DBName,
-		SSLMode:  "disable",    // Adjust based on your environment
-	}
-	dbConn, err := db.NewPgStorage(cfg)
-	if err != nil {
-		log.Fatal("Failed to connect to database:", err)
-	}
-	var connectedUserStore = NewStore(dbConn)
-	handler := NewHandler(connectedUserStore)
+func TestMockedUserServiceHandlers(t *testing.T) {
+	userStore := &mockUserStore{}
+	handler := NewHandler(userStore)
 
 	t.Run("should pass if the user payload is invalid", func(t *testing.T) {
 
@@ -79,4 +66,19 @@ func TestUserServiceHandlers(t *testing.T) {
 			t.Errorf("expected status code to be 200 but got %d", rr.Code)
 		}
 	})
+}
+
+type mockUserStore struct {
+}
+
+func (m *mockUserStore) GetUserByEmail(email string) (*types.User, error) {
+	return nil, fmt.Errorf("user not found")
+}
+
+func (m *mockUserStore) GetUserByID(id int) (*types.User, error) {
+	return nil, nil
+}
+
+func (m *mockUserStore) CreateUser(user *types.User) error {
+	return nil
 }

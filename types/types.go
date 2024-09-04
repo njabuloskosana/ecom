@@ -3,6 +3,7 @@ package types
 import "time"
 
 // for testing and structure for declaration
+// this helps inforce the repository pattern because the everything that needs to use user store must implement the interface
 type UserStore interface {
 	GetUserByEmail(email string) (*User, error)
 	GetUserByID(id int) (*User, error)

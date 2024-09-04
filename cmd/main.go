@@ -23,9 +23,10 @@ func main() {
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
 	}
-	intitStorage(dbConn)
 	defer dbConn.Close()
-	server := api.NewAPIServer(":8080", nil)
+	intitStorage(dbConn)
+
+	server := api.NewAPIServer(":8080", dbConn)
 	if err := server.Run(); err != nil {
 		log.Fatal(err)
 	}

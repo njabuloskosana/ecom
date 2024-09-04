@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/go-playground/validator/v10"
 )
@@ -30,6 +31,10 @@ func WriteJSON(w http.ResponseWriter, status int, v any) error {
 func WriteError(w http.ResponseWriter, status int, err error) {
 	WriteJSON(w, status, map[string]string{"error": err.Error()})
 
+}
+
+func GetCurrentTime() time.Time {
+	return time.Now().UTC()
 }
 
 // singleton to avoid creating multiple instances of the validator

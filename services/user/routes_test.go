@@ -59,9 +59,9 @@ func TestUserServiceHandlers(t *testing.T) {
 	t.Run("should pass if user is created correctly", func(t *testing.T) {
 
 		payload := types.RegisterUserDto{
-			FirstName: "John",
-			LastName:  "Doe",
-			Email:     "john@gmail.com",
+			FirstName: "Johnx1",
+			LastName:  "Doex1",
+			Email:     "johnx1@gmail.com",
 			Password:  "password",
 		}
 

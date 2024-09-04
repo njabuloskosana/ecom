@@ -64,10 +64,11 @@ func (h *Handler) handleRegister(w http.ResponseWriter, r *http.Request) {
 	}
 
 	err = h.store.CreateUser(&types.User{
-		FirstName: payload.FirstName,
-		LastName:  payload.LastName,
-		Email:     payload.Email,
-		Password:  hashedPassword,
+		FirstName:   payload.FirstName,
+		LastName:    payload.LastName,
+		Email:       payload.Email,
+		Password:    hashedPassword,
+		CreatedTime: utils.GetCurrentTime(),
 	})
 
 	if err != nil {

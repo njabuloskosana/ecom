@@ -3,6 +3,7 @@ package user
 // Services will handle the actual requests we avoid adding it in the api.go for
 // readability and management
 import (
+	"ecom/configs"
 	"ecom/services/auth"
 	"ecom/types"
 	"ecom/utils"
@@ -33,6 +34,41 @@ func (h *Handler) RegisterRoutes(router *mux.Router) {
 
 // Actual service functions
 func (h *Handler) handleLogin(q http.ResponseWriter, r *http.Request) {
+	// get json payload and check if user exisits and if not we create the new user
+	var payload types.LoginUserDto
+	if err := utils.ParseJSON(r, &payload); err != nil {
+		utils.WriteError(q, http.StatusBadRequest, err)
+		return
+	}
+
+	// validate the payload
+	if err := utils.Validate.Struct(payload); err != nil {
+		errors := err.(validator.ValidationErrors)
+		utils.WriteError(q, http.StatusBadRequest, fmt.Errorf("invalid payload %v", errors))
+		return
+	}
+
+	returnedUser, err := h.store.GetUserByEmail(payload.Email)
+	if err != nil {
+		utils.WriteError(q, http.StatusBadRequest, fmt.Errorf("user doesnt exists"))
+		return
+	}
+
+	err = auth.ComparePasswords(returnedUser.Password, payload.Password)
+	if err != nil {
+		utils.WriteError(q, http.StatusBadRequest, fmt.Errorf("invalid password"))
+		return
+	}
+
+	// generate token
+	secret := []byte(configs.Envs.JWTSecret)
+	token, err := auth.CreateJWT(secret, returnedUser.ID)
+	if err != nil {
+		utils.WriteError(q, http.StatusInternalServerError, err)
+		return
+	}
+
+	utils.WriteJSON(q, http.StatusOK, map[string]string{"token": token})
 
 }
 

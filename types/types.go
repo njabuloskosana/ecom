@@ -19,9 +19,16 @@ type User struct {
 	CreatedTime time.Time `json:"CreatedTime"`
 }
 
+// RegisterUserDto is the data transfer object for registering a new user
 type RegisterUserDto struct {
 	FirstName string `json:"FirstName" validate:"required"`
 	LastName  string `json:"LastName" validate:"required"`
 	Email     string `json:"Email" validate:"required,email"`
 	Password  string `json:"Password" validate:"required,min=8,max=120"`
+}
+
+// LoginUserDto is the data transfer object for logging in a user
+type LoginUserDto struct {
+	Email    string `json:"Email" validate:"required,email"`
+	Password string `json:"Password" validate:"required,min=8,max=120"`
 }

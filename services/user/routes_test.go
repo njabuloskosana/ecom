@@ -79,4 +79,47 @@ func TestUserServiceHandlers(t *testing.T) {
 			t.Errorf("expected status code to be 200 but got %d", rr.Code)
 		}
 	})
+
+	t.Run("should pass if user is logged in correctly", func(t *testing.T) {
+
+		payload := types.RegisterUserDto{
+			FirstName: "Johnx2",
+			LastName:  "Doex2",
+			Email:     "johnx2@gmail.com",
+			Password:  "password2",
+		}
+
+		loginPayload := types.LoginUserDto{
+			Email:    "johnx2@gmail.com",
+			Password: "password2",
+		}
+
+		marshalled, _ := json.Marshal(loginPayload)
+		req, err := http.NewRequest(http.MethodPost, "/register", bytes.NewBuffer(marshalled))
+		if err != nil {
+			t.Fatal(err)
+		}
+		rr := httptest.NewRecorder()
+		router := mux.NewRouter()
+		router.HandleFunc("/register", handler.handleRegister).Methods(http.MethodPost)
+		router.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Errorf("expected status code to be 200 but got %d", rr.Code)
+		}
+
+		parsedRequest, _ := json.Marshal(payload)
+		req, err = http.NewRequest(http.MethodPost, "/login", bytes.NewBuffer(parsedRequest))
+		if err != nil {
+			t.Fatal(err)
+		}
+		rr = httptest.NewRecorder()
+		router = mux.NewRouter()
+		router.HandleFunc("/login", handler.handleLogin).Methods(http.MethodPost)
+		router.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusOK {
+			t.Errorf("expected status code to be 200 but got %d", rr.Code)
+		}
+	})
 }

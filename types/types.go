@@ -10,6 +10,35 @@ type UserStore interface {
 	CreateUser(user *User) error
 }
 
+type ProductStore interface {
+	GetAllProducts() ([]Product, error)
+	GetProductByIDs(ids []int) ([]Product, error)
+}
+
+type OrderStore interface {
+	CreateOrder(Order) (int, error)
+	CreateOrderItem(OrderItem) error
+}
+
+type Order struct {
+	ID          int       `json:"id"`
+	UserID      int       `json:"user_id"`
+	Total       float64   `json:"total"`
+	Status      string    `json:"status"`
+	Address     string    `json:"address"`
+	CreatedTime time.Time `json:"created_time"`
+}
+
+type OrderItem struct {
+	ID          int       `json:"id"`
+	OrderID     int       `json:"order_id"`
+	ProductID   int       `json:"product_id"`
+	Quantity    float64   `json:"quantity"`
+	Price       float64   `json:"price"`
+	Total       float64   `json:"total"`
+	CreatedTime time.Time `json:"created_time"`
+}
+
 type User struct {
 	ID          int       `json:"ID"`
 	FirstName   string    `json:"FirstName"`
@@ -17,6 +46,15 @@ type User struct {
 	Email       string    `json:"Email"`
 	Password    string    `json:"Password"`
 	CreatedTime time.Time `json:"CreatedTime"`
+}
+
+type Product struct {
+	ID          int       `json:"id"`
+	Name        string    `json:"name"`
+	Description string    `json:"description"`
+	Image       string    `json:"image"`
+	Quantity    float64   `json:"quantity"`
+	CreatedTime time.Time `json:"created_time"`
 }
 
 // RegisterUserDto is the data transfer object for registering a new user
@@ -31,4 +69,13 @@ type RegisterUserDto struct {
 type LoginUserDto struct {
 	Email    string `json:"Email" validate:"required,email"`
 	Password string `json:"Password" validate:"required,min=8,max=120"`
+}
+
+type CartItem struct {
+	ProductID int `json:"product_id"`
+	Quantity  int `json:"quantity"`
+}
+
+type CartCheckoutDto struct {
+	Items []CartItem `json:"items" validate:"required"`
 }

@@ -37,5 +37,7 @@ func GetCurrentTime() time.Time {
 	return time.Now().UTC()
 }
 
+// returns u
+
 // singleton to avoid creating multiple instances of the validator
 var Validate = validator.New()

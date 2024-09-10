@@ -35,3 +35,6 @@ This project is licensed under the [MIT License](./LICENSE).
 
 ## Contact
 For any inquiries or support, please contact us at [email@example.com](mailto:email@example.com).
+
+## Docker
+docker run --name postgres-container -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=0845635040 -e POSTGRES_DB=postgres -p 5433:5432 -d postgres:14

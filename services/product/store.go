@@ -4,10 +4,17 @@ package product
 import (
 	"database/sql"
 	"ecom/types"
+	"fmt"
+	"strings"
 )
 
 type Store struct {
 	db *sql.DB
+}
+
+// GetProductByIDs implements types.ProductStore.
+func (s *Store) GetProductByIDs(ids []int) ([]types.Product, error) {
+	panic("unimplemented")
 }
 
 // CreateUser implements types.ProductStore.
@@ -60,4 +67,41 @@ func scanRowIntoProduct(rows *sql.Rows) (*types.Product, error) {
 	}
 
 	return product, nil
+}
+
+func (s *Store) GetProductsByIds(productIds []int) ([]types.Product, error) {
+	placeholders := strings.Repeat(",?", (len(productIds) - 1))
+	query := fmt.Sprintf("SELECT * FROM products WHERE id IN (?%s)", placeholders)
+
+	// Convert ids into interfaces
+	args := make([]interface{}, len(productIds))
+	for i, v := range productIds {
+		args[i] = v
+	}
+
+	rows, err := s.db.Query(query, args...)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close() // Ensure rows are closed
+
+	products := make([]types.Product, 0)
+	for rows.Next() {
+		p, err := scanRowIntoProduct(rows)
+		if err != nil {
+			return nil, err
+		}
+		products = append(products, *p)
+	}
+
+	return products, nil
+
+}
+
+func (s *Store) UpdateProduct(product types.Product) error {
+	_, err := s.db.Exec("UPDATE products SET quantity = ? WHERE id = ?", product.Quantity, product.ID)
+	if err != nil {
+		return err
+	}
+	return nil
 }

@@ -13,11 +13,12 @@ type UserStore interface {
 type ProductStore interface {
 	GetAllProducts() ([]Product, error)
 	GetProductByIDs(ids []int) ([]Product, error)
+	UpdateProduct(Product) error
 }
 
 type OrderStore interface {
 	CreateOrder(Order) (int, error)
-	CreateOrderItem(OrderItem) error
+	CreateOrderItem(OrderItem) (int, error)
 }
 
 type Order struct {
@@ -55,6 +56,7 @@ type Product struct {
 	Image       string    `json:"image"`
 	Quantity    float64   `json:"quantity"`
 	CreatedTime time.Time `json:"created_time"`
+	Price       float64   `json:"price"`
 }
 
 // RegisterUserDto is the data transfer object for registering a new user

@@ -7,6 +7,7 @@ import (
 	"ecom/configs"
 	"ecom/db"
 	"log"
+	"strconv"
 )
 
 func main() {
@@ -15,7 +16,7 @@ func main() {
 		User:     configs.Envs.DbUser,
 		Password: configs.Envs.DBPassword,
 		Host:     configs.Envs.DBAddress,
-		Port:     5432, // PostgreSQL default port
+		Port:     mustConvertToInt(configs.Envs.Port), // PostgreSQL default port
 		DBName:   configs.Envs.DBName,
 		SSLMode:  "disable", // Adjust based on your environment
 	}
@@ -30,6 +31,13 @@ func main() {
 	if err := server.Run(); err != nil {
 		log.Fatal(err)
 	}
+}
+func mustConvertToInt(s string) int {
+	port, err := strconv.Atoi(s)
+	if err != nil {
+		log.Fatalf("Invalid port number: %v", err)
+	}
+	return port
 }
 
 func intitStorage(db *sql.DB) {

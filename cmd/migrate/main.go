@@ -24,8 +24,8 @@ func main() {
 	cfg := db.PgConfig{
 		User:     configs.Envs.DbUser,
 		Password: configs.Envs.DBPassword,
-		Host:     configs.Envs.DBAddress,
-		Port:     mustConvertToInt(configs.Envs.Port), // PostgreSQL default port
+		Host:     configs.Envs.MigrationHost,
+		Port:     mustConvertToInt(configs.Envs.MigrationPort), // PostgreSQL default port
 		DBName:   configs.Envs.DBName,
 		SSLMode:  "disable", // Adjust based on your environment
 	}

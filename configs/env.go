@@ -17,6 +17,8 @@ type Config struct {
 	DBName                 string
 	JWTExpirationInSeconds int
 	JWTSecret              string
+	MigrationHost          string
+	MigrationPort          string
 }
 
 var Envs = initConfig()
@@ -36,6 +38,8 @@ func initConfig() Config {
 		DBName:                 getEnv("DB_NAME", ""),
 		JWTExpirationInSeconds: getEnvInt("JWT_EXP", 3600*24*7),
 		JWTSecret:              getEnv("JWT_SECRET", ""),
+		MigrationHost:          getEnv("MIGRATION_HOST", ""),
+		MigrationPort:          getEnv("MIGRATION_PORT", ""),
 	}
 }
 

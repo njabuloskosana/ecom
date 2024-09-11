@@ -192,4 +192,6 @@ Looking for alternatives? [https://awesome-go.com/#database](https://awesome-go.
 docker exec -it ecom-db-1 bash
 psql -U postgres
 ALTER USER postgres PASSWORD '0845635040';
+# Restart the api it should connect
+docker-compose up -d
 ## this enusres password overiding works for password auth

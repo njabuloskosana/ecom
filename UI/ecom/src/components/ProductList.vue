@@ -7,7 +7,7 @@
       <div v-else class="product-grid">
         <div v-for="product in products" :key="product.id" class="product-card">
           <div class="product-image">
-            <img :src="`/assets/images/${product.image}`" alt="Product Image" />
+            <img :src="`/assets/images/laptop.png`" alt="Product Image" />
           </div>
           <div class="product-details">
             <h3>{{ product.name }}</h3>

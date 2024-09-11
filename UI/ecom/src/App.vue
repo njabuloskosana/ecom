@@ -1,47 +1,38 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <ProductList :products="products" />
 </template>
 
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import ProductList from './components/ProductList.vue';
+import axios from 'axios';
+
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  quantity: number;
+  created_time: string;
+  price: number;
+}
+
+const products = ref<Product[]>([]);
+const url = 'http://localhost:8080/api/v1/products';
+
+const fetchProducts = async () => {
+  try {
+    const response = await axios.get<Product[]>(url);
+    products.value = response.data;
+    console.log('Fetched products:', products.value); // Check the actual value here
+  } catch (error) {
+    console.error('Failed to fetch products', error);
+  }
+};
+
+onMounted(fetchProducts);
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
+/* Add your styles here */
 </style>

@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=0845635040
+      - DB_NAME=postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - ecom-network
+
+  ui:
+    build:
+      context: ./UI/ecom
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - ecom-network
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 0845635040
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - ecom-network
+
+networks:
+  ecom-network:
+    driver: bridge
+

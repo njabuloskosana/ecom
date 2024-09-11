@@ -186,3 +186,10 @@ Also have a look at the [FAQ](FAQ.md).
 ---
 
 Looking for alternatives? [https://awesome-go.com/#database](https://awesome-go.com/#database).
+
+
+## If database connection is failing because user is not set correctly then
+docker exec -it ecom-db-1 bash
+psql -U postgres
+ALTER USER postgres PASSWORD '0845635040';
+## this enusres password overiding works for password auth

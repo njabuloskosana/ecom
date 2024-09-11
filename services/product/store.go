@@ -61,6 +61,7 @@ func scanRowIntoProduct(rows *sql.Rows) (*types.Product, error) {
 		&product.Image,
 		&product.Quantity,
 		&product.CreatedTime,
+		&product.Price,
 	)
 	if err != nil {
 		return nil, err

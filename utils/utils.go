@@ -3,7 +3,9 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/go-playground/validator/v10"
@@ -19,6 +21,14 @@ func ParseJSON(r *http.Request, payload interface{}) error {
 	decoder := json.NewDecoder(r.Body)
 	return decoder.Decode(payload)
 
+}
+
+func mustConvertToInt(s string) int {
+	port, err := strconv.Atoi(s)
+	if err != nil {
+		log.Fatalf("Invalid port number: %v", err)
+	}
+	return port
 }
 
 func WriteJSON(w http.ResponseWriter, status int, v any) error {

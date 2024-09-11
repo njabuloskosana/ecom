@@ -3,21 +3,29 @@ package main
 import (
 	"ecom/configs"
 	"ecom/db"
-
 	"log"
 	"os"
+	"strconv"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 )
 
+func mustConvertToInt(str string) int {
+	i, err := strconv.Atoi(str)
+	if err != nil {
+		log.Fatalf("Failed to convert string to int: %v", err)
+	}
+	return i
+}
+
 func main() {
 	cfg := db.PgConfig{
 		User:     configs.Envs.DbUser,
 		Password: configs.Envs.DBPassword,
 		Host:     configs.Envs.DBAddress,
-		Port:     5432, // PostgreSQL default port
+		Port:     mustConvertToInt(configs.Envs.Port), // PostgreSQL default port
 		DBName:   configs.Envs.DBName,
 		SSLMode:  "disable", // Adjust based on your environment
 	}

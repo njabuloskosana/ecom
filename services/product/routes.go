@@ -25,6 +25,7 @@ func NewHandler(store types.ProductStore) *Handler {
 func (h *Handler) RegisterRoutes(router *mux.Router) {
 	// definition of route services
 	router.HandleFunc("/products", h.handleGetAllProducts).Methods(http.MethodGet)
+	router.HandleFunc("/products/echo", h.handleEcho).Methods(http.MethodGet)
 
 }
 
@@ -39,4 +40,26 @@ func (h *Handler) handleGetAllProducts(q http.ResponseWriter, r *http.Request) {
 
 	utils.WriteJSON(q, http.StatusOK, products)
 
+}
+
+func (h *Handler) handleEcho(w http.ResponseWriter, r *http.Request) {
+	// Extract query parameters
+	queryParams := r.URL.Query()
+
+	// Extract headers
+	headers := r.Header
+
+	// Extract URL
+	url := r.URL.String()
+
+	// Prepare the response similar to Postman Echo
+	response := map[string]interface{}{
+		"args":    queryParams, // Query parameters
+		"headers": headers,     // Request headers
+		"url":     url,         // Full URL of the request
+	}
+
+	// Encode response as JSON and send it back
+	w.Header().Set("Content-Type", "application/json")
+	utils.WriteJSON(w, http.StatusOK, response)
 }

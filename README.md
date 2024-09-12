@@ -187,6 +187,8 @@ Also have a look at the [FAQ](FAQ.md).
 
 Looking for alternatives? [https://awesome-go.com/#database](https://awesome-go.com/#database).
 
+##
+ docker-compose up --build
 
 ## If database connection is failing because user is not set correctly then
 docker exec -it ecom-db-1 bash
@@ -195,3 +197,8 @@ ALTER USER postgres PASSWORD '0845635040';
 # Restart the api it should connect
 docker-compose up -d
 ## this enusres password overiding works for password auth
+
+
+
+NB CHECK THE ECO
+cHECK HOW DOCKER ALLOWS YOU TO RUN EVERYTHING ON ONE NETWORK

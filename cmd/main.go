@@ -49,3 +49,5 @@ func intitStorage(db *sql.DB) {
 
 	log.Print("DB: Successfully connected!")
 }
+
+// Go has a more generic way of handling our env. check it out.

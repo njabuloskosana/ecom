@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DB_HOST=localhost  # Update this to point to localhost, since it's using host network
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=0845635040
+      - DB_NAME=postgres
+    ports:
+      - "8080:8080"  # Will bind to host network's port 8080
+    depends_on:
+      - db
+    networks:
+      - host  # Use host network
+
+  ui:
+    build:
+      context: ./UI/ecom
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"  # Will bind to host network's port 80
+    networks:
+      - host  # Use host network
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 0845635040
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"  # Expose the port 5432 to the host network
+    networks:
+      - host  # Use host network
+
+networks:
+  host:
+    external: true  # Use the host network provided by Docker

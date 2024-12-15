@@ -198,6 +198,14 @@ ALTER USER postgres PASSWORD '0845635040';
 docker-compose up -d
 ## this enusres password overiding works for password auth
 
+## Run migration
+./seed localhost 5434 postgres
+docker build -t ecom-ui-1
+docker restart 864b243869ab
+docker-compose up --build
+
+make-migrate-up
+make run
 
 
 NB CHECK THE ECO

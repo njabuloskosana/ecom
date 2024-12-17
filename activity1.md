@@ -27,7 +27,7 @@ In this **cyberpunk** scenario, the data smuggler's docker pipeline has glitched
    docker-compose up --build
    docker exec -it ecom-db-1 bash
    psql -U postgres
-   ALTER USER postgres PASSWORD <password>
+   ALTER USER postgres PASSWORD <password> ;
    docker logs <container_name>
    make migrate-up
    go build

@@ -4,7 +4,9 @@ package product
 import (
 	"database/sql"
 	"ecom/types"
+	"encoding/json"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -46,6 +48,22 @@ func (s *Store) GetAllProducts() ([]types.Product, error) {
 			return nil, err
 		}
 		products = append(products, *p)
+	}
+
+	productNames := make([]string, len(products))
+	for i, product := range products {
+		productNames[i] = product.Name
+	}
+	jsonStringProducts, err := json.Marshal(map[string][]string{"products": productNames})
+	if err != nil {
+		log.Printf("JSON Marshal error: %v", err)
+		return nil, fmt.Errorf("failed to marshal product names: %w", err)
+	}
+	notifyQuery := fmt.Sprintf(`SELECT notify_listener('products_retrieved', '%s');`, jsonStringProducts)
+	_, err = s.db.Query(notifyQuery)
+	if err != nil {
+		log.Printf("Notify error: %v", err)
+		return nil, fmt.Errorf("failed to execute notify_listener: %w", err)
 	}
 
 	return products, nil

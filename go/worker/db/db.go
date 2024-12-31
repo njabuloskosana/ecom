@@ -25,7 +25,6 @@ func (cfg PgConfig) ConnString() string {
 }
 
 func NewPgStorage(cfg PgConfig) (*sql.DB, error) {
-	println(cfg.ConnString())
 	db, err := sql.Open("postgres", cfg.ConnString())
 	if err != nil {
 		log.Fatal(err)

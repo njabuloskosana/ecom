@@ -1,35 +1,79 @@
-# Activity 1: **(Running the E-Commerce Store) Running the docker containers**
+# Activity 1: **(Running the E-Commerce Store) Running the API , Frontend and Worker **
 
 _Transmission decrypted... loading instructions..._
 
-In this **cyberpunk** scenario, the data smuggler's docker pipeline has glitched. The root cause? An outdated password hidden deep inside the steel-and-chrome bowels of your container image. Your mission: **update the password and rebuild the containers**. Failure is not an option.
+In this **cyberpunk** scenario, the data smuggler's Docker pipeline has encountered an issue. Your mission: **Run the applications independently**. Failure is not an option.
 
-**Your Toolkit:**
-- **Docker CLI**
-- **Use your local terminal to perform container updates**
+**Toolkit:**
+- **Local Terminal**
+- **Install dependencies and run the applications using your local terminal**
+- **Install Docker and Docker Hub on your system**
 
-**Your Objective:**
-1. **Run the project with docker ps --build** (in the main directory).
-2. **Check the container logs to fix the database error** .
-3. **Fix the errors and rebuild the containers**.
-4. **Verify success** by logging into the ecom-db-1 container.
+**Objective:**
+1. **Run the PostgreSQL container:**
+   ```bash
+   docker run --name ecom-db-1 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=0845635040 -e POSTGRES_DB=postgres -p 5434:5432 -d postgres:14
+   ```
+2. **Access the database container using a database client (e.g., DBeaver or pgAdmin).**
+3. **Seed the database with the command.**
+ ```bash
+   make migrate-up
+   ```
+4. **Need to add the notify listener function into the database. the function is found in the db folder**
+
+5. **Navigate to the frontend directory and execute the following commands:**
+   ```bash
+   npm install
+   npm run dev
+   ```
+
+6. **Navigate to the api directory and execute the following commands:**
+   ```bash
+   go build
+   go run main.go
+   ```
+
+7. **Navigate to the worker directory and execute the following commands:**
+   ```bash
+   go build
+   go run main.go
+   ```
 
 ---
 
-### Important things to note
+### Important Notes
 
-1. **Useful Commands:**
+**Useful Commands:**
 
-   ```bash
-   # Use these docker commands to interact with the list of containers
-    docker ps
-   docker restart <container_id> 
-   docker-compose up --build
-   docker exec -it ecom-db-1 bash
-   psql -U postgres
-   ALTER USER postgres PASSWORD <password> ;
-   docker logs <container_name>
-   make migrate-up
-   go build
-   go run
+```bash
+# List all running containers
+docker ps
+
+# Restart a specific container
+docker restart <container_id>
+
+# Build and start containers using Docker Compose
+docker-compose up --build
+
+# Access the ecom-db-1 container
+docker exec -it ecom-db-1 bash
+
+# Access PostgreSQL within the container
+psql -U postgres
+
+# Change the PostgreSQL user password
+ALTER USER postgres PASSWORD '<password>';
+
+# View logs of a specific container
+docker logs <container_name>
+
+# Run database migrations
+make migrate-up
+
+# Build the Go application
+go build
+
+# Run the Go application
+go run
+```
 

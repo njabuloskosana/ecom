@@ -3,7 +3,7 @@ version: '3.8'
 services:
   api:
     build:
-      context: .
+      context: ./go/api
       dockerfile: Dockerfile
     environment:
       - DB_HOST=db
@@ -35,7 +35,7 @@ services:
 
   ui:
     build:
-      context: ./UI/ecom
+      context: ./web/frontend
       dockerfile: Dockerfile
     ports:
       - "80:80"

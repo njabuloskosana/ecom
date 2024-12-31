@@ -18,6 +18,21 @@ services:
     networks:
       - ecom-network
 
+  worker:
+    build:
+      context: ./go/worker
+      dockerfile: Dockerfile
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=0845635040
+      - DB_NAME=postgres
+    depends_on:
+      - db
+    networks:
+      - ecom-network
+
   ui:
     build:
       context: ./UI/ecom

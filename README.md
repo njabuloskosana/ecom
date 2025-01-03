@@ -38,62 +38,68 @@ Welcome to the E-Commerce Platform repository. This monorepo hosts all component
 
 ```
 .
+├── activity1.md
+├── activity2.md
+├── activity3.md
+├── activity4.md
+├── activity5.md
+├── assests
+│   └── company_logo.png  # Company logo image
 ├── bin
-│   └── ecom # Compiled backend binary
-├── cmd
+│   └── ecom  # Compiled backend binary
+├── docker-compose.yml  # Docker Compose configuration
+├── Dockerfile  # Dockerfile for building the backend service
+├── go
 │   ├── api
-│   │   └── api.go # API server entrypoint
-│   ├── main.go # Main CLI entrypoint
-│   └── migrate
-│       └── main.go # Migrate CLI entrypoint
-├── configs
-│   └── env.go # Environment variable configuration
-├── db
-│   ├── db.go # Database connection logic
-│   └── migrations # SQL migration files
-│       ├── 
-│       └── 
-├── docker-compose.yml # Docker services definition
-├── Dockerfile # Dockerfile for backend
-├── go.mod, go.sum # Go dependencies
-├── LICENSE # Project license
-├── Makefile # Common build/test tasks
-├── migrate, migrate.tar.gz # Migration tools
-├── README.md # This file
-├── services
-│   ├── auth
-│   │   ├── jwt.go # JWT utilities
-│   │   └── password.go # Password hashing
-│   ├── cart
-│   │   ├── routes.go # Cart endpoints
-│   │   └── service.go # Cart business logic
-│   ├── order
-│   │   └── store.go # Order persistence
-│   ├── product
-│   │   ├── routes.go # Product endpoints
-│   │   └── store.go # Product persistence
-│   └── user
-│       ├── routes.go # User endpoints
-│       ├── routes_test.go # Integration tests
-│       ├── routes_unit_test.go # Unit tests
-│       └── store.go # User persistence
-├── types
-│   └── types.go # Shared data types
-├── UI
-│   └── ecom
-│       ├── Dockerfile # Frontend Dockerfile
-│       ├── env.d.ts # Frontend env typings
-│       ├── index.html # Frontend entrypoint
-│       ├── node_modules # Node dependencies (not committed)
-│       ├── package.json # Node.js project config
-│       ├── package-lock.json
-│       ├── public # Public assets
-│       ├── README.md # Frontend-specific instructions
-│       ├── src # Frontend source (components, pages)
-│       ├── tsconfig.*.json # TypeScript config files
-│       └── vite.config.ts # Vite configuration
-└── utils
-    └── utils.go # Shared utility functions
+│   │   ├── api  # API handlers
+│   │   ├── configs  # Configuration files
+│   │   ├── main.go  # Main entry point for the API
+│   │   ├── services  # Business logic and services
+│   │   ├── types  # Type definitions
+│   │   ├── utils  # Utility functions
+│   │   └── web  # Web server related files
+│   ├── db
+│   │   ├── db.go  # Database connection and setup
+│   │   ├── functions  # Database functions
+│   │   ├── migrate  # Migration scripts
+│   │   └── migrations  # Migration files
+│   └── worker
+│       ├── client  # Worker client code
+│       ├── common  # Common utilities for workers
+│       ├── configs  # Worker configuration files
+│       ├── convert  # Data conversion utilities
+│       ├── db  # Database interactions for workers
+│       ├── Dockerfile  # Dockerfile for building the worker service
+│       ├── go.mod  # Go module file for worker
+│       ├── go.sum  # Go dependencies for worker
+│       ├── handler  # Handlers for worker tasks
+│       ├── loader  # Data loading utilities
+│       ├── main.go  # Main entry point for the worker
+│       ├── util  # Utility functions for workers
+│       ├── worker  # Worker implementation
+│       └── worker-secrets.json  # Secrets for worker
+├── go.mod  # Go module file for the project
+├── go.sum  # Go dependencies for the project
+├── LICENSE  # License file
+├── Makefile  # Makefile for build automation
+├── README.md  # Project documentation
+└── web
+    └── frontend
+        ├── Dockerfile  # Dockerfile for building the frontend
+        ├── env.d.ts  # TypeScript environment definitions
+        ├── index.html  # Main HTML file for the frontend
+        ├── node_modules  # Node.js dependencies
+        ├── package.json  # Node.js project metadata
+        ├── package-lock.json  # Lockfile for Node.js dependencies
+        ├── public  # Public assets for the frontend
+        ├── README.md  # Frontend documentation
+        ├── src  # Source code for the frontend
+        ├── tsconfig.app.json  # TypeScript configuration for the app
+        ├── tsconfig.json  # Base TypeScript configuration
+        ├── tsconfig.node.json  # TypeScript configuration for Node.js
+        └── vite.config.ts  # Vite configuration file
+
+27 directories, 33 files
 ```
 
 ## Getting Started
@@ -126,7 +132,7 @@ Welcome to the E-Commerce Platform repository. This monorepo hosts all component
         ```
     - Frontend:
         ```sh
-        cd UI/ecom
+        cd web/frontend
         npm install
         cd ../..
         ```
@@ -145,11 +151,11 @@ Welcome to the E-Commerce Platform repository. This monorepo hosts all component
     - Locally (non-Docker):
         - Backend:
             ```sh
-            make run
+            go build , go run main.go
             ```
         - Frontend:
             ```sh
-            cd UI/ecom
+            cd web/frontend
             npm run dev
             ```
 
@@ -175,7 +181,7 @@ Welcome to the E-Commerce Platform repository. This monorepo hosts all component
 
 - **Frontend Development**:
     ```sh
-    cd UI/ecom
+    cd web/frontend
     npm run dev
     ```
 

@@ -45,17 +45,15 @@ MIGRATION_PORT=5434
 MIGRATION_HOST=127.0.0.1
 ```
 
-## Excercise 1
-[Go to Excercise 1](./ecom/activity1.md)
-## Excercise 2
-[Go to Excercise 2](./ecom/activity2.md)
-## Excercise 3
-[Go to Excercise 3](./ecom/activity3.md)
-## Excercise 4
-[Go to Excercise 4](./ecom/activity4.md)
+## Exercises
 
-## Bonus
-[Go to Excercise 5](./ecom/activity5.md)
+| Exercise | Link |
+|----------|------|
+| Exercise 1 | [Go to Exercise 1](./ecom/activity1.md) |
+| Exercise 2 | [Go to Exercise 2](./ecom/activity2.md) |
+| Exercise 3 | [Go to Exercise 3](./ecom/activity3.md) |
+| Exercise 4 | [Go to Exercise 4](./ecom/activity4.md) |
+| Bonus | [Go to Exercise 5](./ecom/activity5.md) |
 
 ### Technologies
 
@@ -304,3 +302,9 @@ This indicates that port 8080 is already in use by another process. Follow these
         ```sh
         taskkill /PID <PID> /F
         ```
+
+## Contributors
+
+| Name                | Email                        |
+|---------------------|------------------------------|
+| **Njabulo Skosana**  | [njabulo@isaziconsulting.co.za](mailto:njabulo@isaziconsulting.co.za) |

@@ -12,7 +12,7 @@ RUN go mod download
 COPY . .
 
 # Build the Go binary using the main.go entry point
-RUN go build -o ./bin/ecom ./cmd/main.go
+RUN go build -o ./bin/ecom ./go/api//main.go
 
 # Step 2: Create the production container
 FROM alpine:3.18

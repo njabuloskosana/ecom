@@ -6,19 +6,56 @@
 
 Welcome to the E-Commerce Platform repository. This monorepo hosts all components for a complete e-commerce solution, including backend services, database migrations, and a frontend UI. This documentation will guide you through setup, development workflows, and best practices.
 
+## Getting Started With The Tech Stack
+### Helpful Resources
+
+- [Go Quickstart Guide](https://golang.org/doc/tutorial/getting-started)
+- [Vue.js Documentation](https://vuejs.org/v2/guide/)
+- [Docker Overview](https://docs.docker.com/get-started/)
+
+### Video Tutorial
+
+For a visual guide, check out this [YouTube tutorial](https://www.youtube.com/watch?v=un6ZyFkqFKo) on setting up a Go project.
+
+
 ## Tasks And Project Overview
 
+## Adding .env Files to Main Directories
+
+Replace all instances of `env.txt` files with `.env` files containing the following configuration:
+
+```sh
+# Server configuration
+PUBLIC_HOST=http://localhost
+ENVIRONMENT=DEV
+PORT=5434
+
+# Database configuration
+DB_USER=postgres
+DB_PASSWORD=0845635040
+# For Docker on the same network, the host must match the service name in the docker-compose file
+# DB_HOST=db
+DB_HOST=127.0.0.1
+DB_PORT=5434
+DB_NAME=postgres
+JWT_SECRET=secret
+JWT_EXP=604800
+
+MIGRATION_PORT=5434
+MIGRATION_HOST=127.0.0.1
+```
+
 ## Excercise 1
-[Go to Excercise 1](./activity1.md)
+[Go to Excercise 1](./ecom/activity1.md)
 ## Excercise 2
-[Go to Excercise 2](./activity2.md)
+[Go to Excercise 2](./ecom/activity2.md)
 ## Excercise 3
-[Go to Excercise 3](./activity3.md)
+[Go to Excercise 3](./ecom/activity3.md)
 ## Excercise 4
-[Go to Excercise 4](./activity4.md)
+[Go to Excercise 4](./ecom/activity4.md)
 
 ## Bonus
-[Go to Excercise 5](./activity5.md)
+[Go to Excercise 5](./ecom/activity5.md)
 
 ### Technologies
 
@@ -238,3 +275,32 @@ For questions or support, contact the engineering team via internal channels or 
     ```
 
 **Note**: Check how Docker allows you to run everything on one network.
+
+### Resolving Port Binding Issues
+
+If you encounter the error:
+
+```
+listen tcp :8080: bind: address already in use
+exit status 1
+```
+
+This indicates that port 8080 is already in use by another process. Follow these steps to resolve the issue:
+
+1. **Identify and Kill the Process Using Port 8080**:
+    - On Linux/macOS:
+        ```sh
+        lsof -i :8080
+        ```
+        To terminate the process:
+        ```sh
+        kill -9 <PID>
+        ```
+    - On Windows:
+        ```sh
+        netstat -ano | findstr :8080
+        ```
+        To terminate the process:
+        ```sh
+        taskkill /PID <PID> /F
+        ```

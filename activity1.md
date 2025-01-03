@@ -12,28 +12,23 @@ In this **cyberpunk** scenario, the data smuggler's Docker pipeline has encounte
 **Objective:**
 1. **Run the PostgreSQL container:**
    ```bash
-   docker run --name ecom-db-1 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=0845635040 -e POSTGRES_DB=postgres -p 5434:5432 -d postgres:14
+   docker run --name ecom-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=0845635040 -e POSTGRES_DB=postgres -p 5434:5432 -d postgres:14
    ```
 2. **Access the database container using a database client (e.g., DBeaver or pgAdmin).**
-3. **Seed the database with the command.**
- ```bash
-   make migrate-up
-   ```
-4. **Need to add the notify listener function into the database. the function is found in the db folder**
 
-5. **Navigate to the frontend directory and execute the following commands:**
+3. **Navigate to the frontend directory and execute the following commands:**
    ```bash
    npm install
    npm run dev
    ```
 
-6. **Navigate to the api directory and execute the following commands:**
+4. **Navigate to the api directory and execute the following commands:**
    ```bash
    go build
    go run main.go
    ```
 
-7. **Navigate to the worker directory and execute the following commands:**
+5. **Navigate to the worker directory and execute the following commands:**
    ```bash
    go build
    go run main.go

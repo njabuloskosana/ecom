@@ -9,6 +9,7 @@ In this **cyberpunk** scenario, the data smuggler's docker pipeline has glitched
 - **Use your local terminal to perform container updates**
 
 **Your Objective:**
+1. **Go to each .env in the go/api , go/worker , ./ecom and complete the instructions in those files**
 1. **Run the project with docker ps --build** (in the main directory).
 2. **Check the container logs to fix the database error** .
 3. **Fix the errors and rebuild the containers**.

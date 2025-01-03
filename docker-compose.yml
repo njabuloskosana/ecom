@@ -28,6 +28,8 @@ services:
       - DB_USER=postgres
       - DB_PASSWORD=0845635040
       - DB_NAME=postgres
+    ports:
+      - "8081:8081"
     depends_on:
       - db
     networks:
@@ -49,7 +51,7 @@ services:
       POSTGRES_PASSWORD: 0845635040
       POSTGRES_DB: postgres
     ports:
-      - "5434:5432"
+      - "5435:5432"
     networks:
       - ecom-network
 

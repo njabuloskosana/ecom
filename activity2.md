@@ -10,6 +10,7 @@ In this **cyberpunk** scenario, the data smuggler's database is empty. The root 
 **Your Objective:**
 1. **The makefile has commands to run migrations , open the makefile and find out which command to use to seed the database** (in the main directory).
 2. **Verify success** by checking the UI, you should be abe to see the list of products.
+3. **Run curl -X GET http://localhost:8080/api/v1/products on your terminal, you should see a list of products**
 
 ---
 

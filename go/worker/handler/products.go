@@ -5,6 +5,10 @@ import (
 	"log"
 )
 
+// This will hold the business logic that the functions the worker has to complete,
+// using depenedency injection to pass the database connection
+// The idea is for for the files to be named based on the service they are handling
+
 type ProductHandler struct {
 	addr string
 	db   *sql.DB

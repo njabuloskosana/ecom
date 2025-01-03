@@ -2,7 +2,7 @@
   <img src="./assests/company_logo.png" alt="Company Logo" width="200px">
 </p>
 
-# Isazi (Sophia) Software Developemt Onboarding : E-Commerce Platform
+# Isazi (Sophia) Software Development Onboarding : E-Commerce Platform
 
 Welcome to the E-Commerce Platform repository. This monorepo hosts all components for a complete e-commerce solution, including backend services, database migrations, and a frontend UI. This documentation will guide you through setup, development workflows, and best practices.
 
@@ -16,6 +16,9 @@ Welcome to the E-Commerce Platform repository. This monorepo hosts all component
 [Go to Excercise 3](./activity3.md)
 ## Excercise 4
 [Go to Excercise 4](./activity4.md)
+
+## Bonus
+[Go to Excercise 5](./activity5.md)
 
 ### Technologies
 

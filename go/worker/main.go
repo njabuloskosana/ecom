@@ -31,6 +31,8 @@ func main() {
 	db.InitStorage(dbConn)
 
 	connStr := "user=" + configs.Envs.DbUser + " password=" + configs.Envs.DBPassword + " host=" + configs.Envs.DBAddress + " port=" + configs.Envs.Port + " dbname=" + configs.Envs.DBName + " sslmode=disable"
+
+	// business logic functions for the worker
 	userHandler := handler.NewUserHandler(connStr, dbConn)
 	// Setup handlers for specific topics
 	options := map[string]func(string){
@@ -43,6 +45,6 @@ func main() {
 		go db.StartListener(topic, handlerFunc, connStr)
 	}
 
-	log.Println("Server is running and listening for notifications...")
+	log.Println("Server is running on port 8081:8081 and listening for notifications...")
 	select {} // Keep the application running
 }

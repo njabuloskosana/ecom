@@ -1,35 +1,19 @@
 @import './base.css';
 
+/* Global styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%; /* Ensure full height */
+  background-color: #fafafa;
+  font-family: "Helvetica Neue", Avenir, Arial, sans-serif;
+}
+
+/* Ensure the app container takes up full height */
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+  width: 100%;
+  min-height: 100%; /* Use min-height to ensure it expands */
+  display: flex; /* Use Flexbox for centering or layout */
+  flex-direction: column; /* Stack child elements vertically */
 }

@@ -52,4 +52,21 @@ export interface Store {
         hasLoyaltyProgram: boolean;
         comingSoon?: boolean;
       }
+
+export interface Voucher {
+  id: number;
+  uuId: string;
+  userId: number;
+  voucherId: number;
+  voucherName: string;
+  voucherCode: string;
+  usersFullName: string;
+  discountType: string;
+  claimed: boolean;
+  remainingPoints: number;
+  assignedPercentageAmount: number;
+  assignedMonetaryAmount: number;
+  isActive: boolean;
+  expiryDate: string;
+}
       

@@ -120,8 +120,6 @@ export default defineComponent({
 
        const user : LoginResponse = response.data;
 
-        // Handle successful login
-        console.log("Login Successful:", response);
 
         // Store JWT token in local storage
         localStorage.setItem("jwtToken", user.jwtToken);
@@ -131,7 +129,6 @@ export default defineComponent({
         // Set login status and navigate to welcome page
         isLoggedIn.value = true;
         router.push("/home-elarduspark?tenant=elarduspark");
-       console.log("Navigate to the correct UI based on your roles and permissions:");
       } catch (error) {
         errorMessage.value = "Invalid credentials or server error.";
         isErrorModalVisible.value = true; // Show the error modal
@@ -181,6 +178,7 @@ const retryLogin = () => {
   background-attachment: fixed;
   background-size: cover;
   background-position: center center;
+  color: #333;
 }
 
 .login-card {
@@ -190,6 +188,7 @@ const retryLogin = () => {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 500px;
+  color: #333;
 }
 
 .login-title {

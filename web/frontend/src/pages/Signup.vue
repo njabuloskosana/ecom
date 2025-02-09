@@ -181,7 +181,6 @@ import type { User } from "@/interfaces";
       userName: user.value.userEmail, // Use email as username
     });
   
-      console.log("Signup Successful:", response.data);
       isSignedUp.value = true;
   
       // Redirect to login page after signup
@@ -211,6 +210,7 @@ import type { User } from "@/interfaces";
   <style scoped>
   /* General Styles */
   .signup-container {
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;

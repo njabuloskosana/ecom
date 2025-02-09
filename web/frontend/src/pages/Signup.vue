@@ -127,23 +127,9 @@
   import Loader from "../components/Loader.vue";
   import NotificationModal from "../components/Notification.vue"; 
   import Config from "../config/index"// Ensure the path is correct
+import type { User } from "@/interfaces";
   
-  // Define the User interface
-  interface UserProfile {
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-    alternativeNumber?: string;
-  }
-  
-  interface User {
-    userEmail: string;
-    userName: string;
-    password: string;
-    notificationPreferences: number[];
-    roleId: number[];
-    profile: UserProfile;
-  }
+
   
   // Reactive state variables
   const user = ref<User>({
@@ -153,6 +139,8 @@
     notificationPreferences: [0,2],
     roleId: [2], // Default role ID (e.g., Customer)
     profile: {
+      id: 0,
+      userId: 0,
       firstName: "",
       lastName: "",
       phoneNumber: "",

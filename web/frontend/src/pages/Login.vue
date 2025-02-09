@@ -66,34 +66,9 @@ import { useRouter } from "vue-router";
 import Loader from "../components/Loader.vue";
 import NotificationModal from "../components/Notification.vue";// Ensure the path is correct
 import Config from "@/config";
+import type { LoginResponse } from "../interfaces/index";
 
-// Define the main response interface
-interface LoginResponse {
-  jwtToken: string; // JWT token as a string
-  userProfile: UserProfile; // User profile details
-  userInformation: UserInformation; // User information details
-}
 
-// Define the UserProfile interface
-interface UserProfile {
-  id: number; // Unique identifier for the profile
-  userId: number; // User ID associated with the profile
-  firstName: string; // First name of the user
-  lastName: string; // Last name of the user
-  phoneNumber: string; // Phone number of the user
-}
-
-// Define the UserInformation interface
-interface UserInformation {
-  id: number; // Unique identifier for the user information
-  uuId: string; // UUID of the user
-  userEmail: string; // Email address of the user
-  userName: string; // Username (can be the same as email)
-  isActive: boolean; // Indicates if the user account is active
-  creationDate: string; // Date when the user account was created
-  userRoles: string[]; // Array of roles assigned to the user
-  units: number; // Units associated with the user (e.g., loyalty points)
-}
 
 export default defineComponent({
   components: {
@@ -110,6 +85,22 @@ export default defineComponent({
     const baseUrl = Config.BASE_API_URL_PRODUCTION;
     const router = useRouter();
 
+    // Query the local storage for the JWT token and user info then navigate the user to the correct UI
+    const checkLoginStatus = () => {
+      const jwtToken = localStorage.getItem("jwtToken");
+      const userInfo = localStorage.getItem("userInfo");
+      const userProfile = localStorage.getItem("userProfile");
+
+      if (jwtToken && userInfo && userProfile) {
+      isLoggedIn.value = true;
+      // Navigate to the correct UI based on roles and permissions
+      router.push("/home-elarduspark?tenant=elarduspark");
+      }
+    };
+
+    // Call the function to check login status on component mount
+    checkLoginStatus();
+
     // Method to handle login
     const handleLogin = async () => {
       if (!email.value || !password.value) {
@@ -121,21 +112,26 @@ export default defineComponent({
         isLoading.value = true; // Show the loader
 
         const url = baseUrl + "/User/Login";
-        const response: LoginResponse = await axios.post(url, {
+        const response: any = await axios.post(url, {
           email: email.value,
           username: email.value,
           password: password.value,
         });
 
+       const user : LoginResponse = response.data;
+
         // Handle successful login
         console.log("Login Successful:", response);
 
         // Store JWT token in local storage
-        localStorage.setItem("jwtToken", response.jwtToken);
+        localStorage.setItem("jwtToken", user.jwtToken);
+        localStorage.setItem("userInfo", JSON.stringify(user.userInformation));
+        localStorage.setItem("userProfile", JSON.stringify(user.userProfile));
 
         // Set login status and navigate to welcome page
         isLoggedIn.value = true;
-        router.push("/welcome");
+        router.push("/home-elarduspark?tenant=elarduspark");
+       console.log("Navigate to the correct UI based on your roles and permissions:");
       } catch (error) {
         errorMessage.value = "Invalid credentials or server error.";
         isErrorModalVisible.value = true; // Show the error modal

@@ -41,8 +41,8 @@
 
         <!-- Forgot Password Link -->
         <div class="forgot-password">
-          <router-link to="/forgot-password" class="forgot-password-link"
-            >Forgot Password?</router-link
+          <router-link to="/" class="forgot-password-link"
+            >Discover More Rewards</router-link
           >
         </div>
 

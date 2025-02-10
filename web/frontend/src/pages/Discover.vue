@@ -49,11 +49,10 @@
             </h2>
           <p><strong>Status:</strong> {{ `Online` }}</p>
           <p><strong>Hours:</strong> {{ `24 Hours` }}</p>
-          <p> <strong>Gaming Center:</strong> Play games and win.</p>
-          <p class="status closed">Status: Coming Soon 2025</p>
+          <p> <strong>Gaming Center:</strong>Unleash your skills, conquer challenges, and win big!</p>
+          <p class="status open">Status: Open Now</p>
           <button
       class="rewards-button"
-       :disabled="true"
       @click="openGamingCenter()"
     >
     Start Playing
@@ -194,7 +193,7 @@ import type { Store } from "@/interfaces";
       };
 
       const openGamingCenter = () => {
-        alert(`open gaming center`);
+        router.push('/games/tictactoe');
         // Implement navigation or further actions here
       };
 

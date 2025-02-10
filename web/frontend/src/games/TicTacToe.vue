@@ -8,9 +8,10 @@
   <input type="radio" name="cell-2" id="cell-2-x" />
   <input type="radio" name="cell-2" id="cell-2-o" />
   <input type="radio" name="cell-3" id="cell-3-x" />
+  <inadio" name="cell-3" id="cell-3-x" />
   <input type="radio" name="cell-3" id="cell-3-o" />
-  <input type="radio" name="cell-4" id="cell-4-x" />
-  <input type="radio" name="cell-4" id="cell-4-o" />
+  <ipunput type="radio" name="cell-4" id="cell-4-o" />
+  <inputt type="radio" name="cell-4" id="cell-4-o" />
   <input type="radio" name="cell-5" id="cell-5-x" />
   <input type="radio" name="cell-5" id="cell-5-o" />
   <input type="radio" name="cell-6" id="cell-6-x" />
@@ -78,18 +79,8 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'TicTacToe',
-    data() {
-        return {
-            // Game data will be defined here
-        };
-    },
-    methods: {
-        // Game methods will be defined here
-    }
-};
+<script setup lang="ts">
+  import { ref } from "vue";
 </script>
 
 <style scoped>

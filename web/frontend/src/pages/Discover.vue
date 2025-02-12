@@ -4,6 +4,8 @@
       <!-- Store Locator Title -->
       <h1 class="locator-title">Discover Your Local Store & Unlock Exclusive Rewards</h1>
   
+      <IconGrid></IconGrid>
+      
       <!-- Search Bar -->
       <div class="search-bar">
         <input
@@ -39,77 +41,81 @@
       @select-store="selectStore"
     />
         </div>
+        <!-- Gaming Center -->
         <div class="store-card">
-            <h2>
-            <img
-                class="store-icon"
-                :src="gamingIcon"
-            />
-            {{ `Gaming Center` }}
-            </h2>
+          <h2>
+          <img
+            class="store-icon"
+            :src="gamingIcon"
+          />
+          {{ `Gaming Center` }}
+          </h2>
           <p><strong>Status:</strong> {{ `Online` }}</p>
           <p><strong>Hours:</strong> {{ `24 Hours` }}</p>
           <p> <strong>Gaming Center:</strong>Unleash your skills, conquer challenges, and win big!</p>
           <p class="status open">Status: Open Now</p>
           <button
-      class="rewards-button"
-      @click="openGamingCenter()"
-    >
-    Start Playing
-    </button>
+        class="rewards-button"
+        @click="openGamingCenter()"
+        >
+        Start Playing
+        </button>
         </div>
 
+        <!-- Customer Service -->
         <div class="store-card">
-            <h2>
-            <img
-                class="store-icon"
-                :src="supportIcon"
-            />
-            {{ `Customer Service Center` }}
-            </h2>
+          <h2>
+          <img
+            class="store-icon"
+            :src="supportIcon"
+          />
+          {{ `Customer Service Center` }}
+          </h2>
           <p><strong>Status:</strong> {{ `Online` }}</p>
           <p><strong>Hours:</strong> {{ `24 Hours` }}</p>
           <p> <strong>Customer Service:</strong> Helping with offers, rewards , promotions, questions, and account support.</p>
           <p class="status open">Status: Open Now</p>
           <button
-      class="rewards-button"
-      @click="contactSupport()"
-    >
-    Contact Support
-    </button>
+        class="rewards-button"
+        @click="contactSupport()"
+        >
+        Contact Support
+        </button>
         </div>
 
+        <!-- Rewards Network -->
         <div class="store-card">
-    <h2>
-        <img class="store-icon" :src="registerIcon" />
-        {{ `Join SA's Best Rewards Network ` }}
-    </h2>
-    <p><strong>Status:</strong> {{ `Online` }}</p>
-    <p><strong>Hours:</strong> {{ `24 Hours` }}</p>
-    <p><strong>Register your business today , </strong> Partner with us and unlock exclusive benefits. </p>
-    <p class="status open">Status: Available</p>
-    
-    <button class="rewards-button" @click="registerForRewards()">
-        Join the Rewards Network
-    </button>
-    
-</div>
+        <h2>
+          <img class="store-icon" :src="registerIcon" />
+          {{ `Join SA's Best Rewards Network ` }}
+        </h2>
+        <p><strong>Status:</strong> {{ `Online` }}</p>
+        <p><strong>Hours:</strong> {{ `24 Hours` }}</p>
+        <p><strong>Register your business today , </strong> Partner with us and unlock exclusive benefits. </p>
+        <p class="status open">Status: Available</p>
 
-<div class="store-card">
-    <h2>
-        <img class="store-icon" :src="shopIcon" />
-        {{ `Shop for Loyalty Points and Rewards ` }}
-    </h2>
-    <p><strong>Status:</strong> {{ `Online` }}</p>
-    <p><strong>Hours:</strong> {{ `24 Hours` }}</p>
-    <p><strong>Shop for loyalty points and rewards,</strong> Earn points with every purchase and unlock exclusive benefits.</p>
-    <p class="status open">Status: Available</p>
-    
-    <button class="rewards-button" @click="registerForRewards()">
-        Shop For Rewards
-    </button>
-    
-</div>
+        <button class="rewards-button" @click="registerForRewards()">
+          Join the Rewards Network
+        </button>
+
+        </div>
+
+        <!-- Shop for Rewards -->
+        <div class="store-card">
+        <h2>
+          <img class="store-icon" :src="shopIcon" />
+          {{ `Shop for Loyalty Points and Rewards ` }}
+        </h2>
+        <p><strong>Status:</strong> {{ `Online` }}</p>
+        <p><strong>Hours:</strong> {{ `24 Hours` }}</p>
+        <p><strong>Shop for loyalty points and rewards,</strong> Earn points with every purchase and unlock exclusive benefits.</p>
+        <p class="status open">Status: Available</p>
+
+        <button class="rewards-button" @click="registerForRewards()">
+          Shop For Rewards
+        </button>
+
+        </div>
       </div>
     </div>
   </template>
@@ -123,11 +129,13 @@ import { defineComponent, ref, computed } from "vue";
 import StoreCard from "../components/StoreCard.vue";
 import { useRouter } from 'vue-router';
 import type { Store } from "@/interfaces";
+import IconGrid from "@/components/IconGrid.vue";
   
   export default defineComponent({
     name: "StoreLocator",
     components: {
       StoreCard,
+      IconGrid
     },
     setup() {
       
@@ -268,7 +276,6 @@ import type { Store } from "@/interfaces";
   
   .search-bar input {
     flex: 1;
-    max-width: 400px;
     padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 4px;

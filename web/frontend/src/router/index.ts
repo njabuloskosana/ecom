@@ -4,6 +4,7 @@ import Discover from "../pages/Discover.vue";
 import Signup from "../pages/Signup.vue";
 import ElHome from "../total-client-ui/Home.vue";
 import TicTacToe from "../games/TicTacToe.vue";
+import ComingSoon from "../components/ComingSoon.vue";
 
 const routes: RouteRecordRaw[] = [
   { path: "/login", component: Login },
@@ -12,6 +13,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/signup", component: Signup },
   { path: "/games/tictactoe", component: TicTacToe },
   { path: "/home-elarduspark", component: ElHome },
+  {path:"/coming-soon",component:ComingSoon},
 ];
 
 const router = createRouter({

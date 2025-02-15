@@ -2,7 +2,7 @@
     <div class="store-locator">
   
       <!-- Store Locator Title -->
-      <h1 class="locator-title">Discover Your Local Store & Unlock Exclusive Rewards</h1>
+      <Ads></Ads>
   
       <IconGrid></IconGrid>
       
@@ -14,7 +14,7 @@
           placeholder="Search for a store..."
           @keyup="filterStores"
         />
-        <button @click="toggleFilters">Filter</button>
+        <button @click="toggleFilters"><img src="../assets/filter.svg"></button>
       </div>
   
       <!-- Filters -->
@@ -28,6 +28,11 @@
           </label>
         </div>
       </transition>
+
+      <div class="label">
+        <div>Favourites</div>
+        <div class="see-all-label">See all</div>
+      </div>
   
       <!-- Store List -->
       <div class="store-list">
@@ -118,6 +123,10 @@
         </div>
       </div>
     </div>
+    <BottomNav
+      :navItems="navItems"
+      :currentRoute="'/'"
+    />
   </template>
   
   <script lang="ts">
@@ -125,20 +134,50 @@
   import gamingIcon from "../assets/gaming.png";
   import shopIcon from "../assets/discount.png";
   import registerIcon from "../assets/register.png";
+  import discoverIcon from "../assets/discover.svg";
+import storeIcon from "../assets/cart.svg";
+import redeemIcon from "../assets/loyalty_program.svg";
+import walletIcon from "../assets/wallet.svg";
 import { defineComponent, ref, computed } from "vue";
 import StoreCard from "../components/StoreCard.vue";
 import { useRouter } from 'vue-router';
 import type { Store } from "@/interfaces";
 import IconGrid from "@/components/IconGrid.vue";
+import BottomNav from "../components/BottomNav.vue";
+import Ads from "../components/Ads.vue"
   
   export default defineComponent({
     name: "StoreLocator",
     components: {
       StoreCard,
-      IconGrid
+      IconGrid,
+      BottomNav,
+      Ads,
     },
     setup() {
-      
+
+ const navItems = [
+        {
+          label: 'Discover',
+          route: '/',
+          svgSrc: discoverIcon
+        },
+        {
+          label: 'Shop',
+          route: '/coming-soon',
+          svgSrc: storeIcon
+        },
+        {
+          label: 'Redeem',
+          route: '/coming-soon',
+          svgSrc: redeemIcon
+        },
+        {
+          label: 'Wallet',
+          route: '/coming-soon',
+          svgSrc: walletIcon
+        }
+      ]
       const router = useRouter();
       // Sample store data
       const stores = ref<Store[]>([
@@ -196,7 +235,7 @@ import IconGrid from "@/components/IconGrid.vue";
       };
 
        const contactSupport = () => {
-        alert(`show support form`);
+        router.push('/coming-soon');
         // Implement navigation or further actions here
       };
 
@@ -206,7 +245,7 @@ import IconGrid from "@/components/IconGrid.vue";
       };
 
       const registerForRewards = () => {
-        alert(`register for rewards`);
+        router.push('/coming-soon');
         // Implement navigation or further actions here
       };
   
@@ -225,7 +264,13 @@ import IconGrid from "@/components/IconGrid.vue";
         gamingIcon,
         registerForRewards,
         registerIcon,
-        shopIcon
+        redeemIcon,
+        walletIcon,
+        shopIcon,
+        navItems,
+        discoverIcon,
+        storeIcon,
+
       };
     },
   });
@@ -266,36 +311,49 @@ import IconGrid from "@/components/IconGrid.vue";
     color: var(--secondary-color);
   }
   
-  /* Search Bar */
   .search-bar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    justify-content: center;
-  }
-  
-  .search-bar input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  .search-bar button {
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .search-bar button:hover {
-    background-color: var(--primary-hover);
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 1.25rem 0;
+  padding: 0.5rem;
+  background-color: var(--secondary-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.search-bar button {
+  padding: 0.75rem 1.5rem;
+  background-color: var(#888);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-bar button:hover {
+  background-color: var(#888);
+  transform: translateY(-1px);
+}
   /* Filters */
   .filters {
     text-align: center;
@@ -409,6 +467,21 @@ import IconGrid from "@/components/IconGrid.vue";
 
 .rewards-button:not(:disabled):hover {
   background-color: var(--primary-hover);
+}
+
+.label{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  color: var(--secondary-color);
+  font-size: 20px;
+  padding: 5px;
+}
+
+.see-all-label{
+  color:black;
 }
   </style>
   

@@ -37,7 +37,7 @@
     name: 'BottomNav',
     props: {
       navItems: {
-        type: Array,
+        type: Array<any>,
         default: () => []
       },
       currentRoute: {

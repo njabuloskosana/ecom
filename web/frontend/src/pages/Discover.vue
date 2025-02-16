@@ -108,7 +108,8 @@
           {{ `Customer Service Center` }}
           </h2>
           <p> <strong>Customer Service:</strong> Helping with offers, rewards , promotions, questions, and account support.</p>
-          <p class="status open">Available</p>
+         <!--- <p class="status open">Available</p> -->
+         <p class="status closed">Coming soon</p>
           <button
         class="rewards-button"
         @click="contactSupport()"
@@ -125,7 +126,9 @@
         </h2>
        
         <p><strong>Register your business today , </strong> Partner with us and unlock exclusive benefits. </p>
-        <p class="status open">Available</p>
+       <!--<p class="status open">Available</p> -->
+       <p class="status closed">Coming soon</p>
+
 
         <button class="rewards-button" @click="registerForRewards()">
           Join the Rewards Network
@@ -141,7 +144,8 @@
         </h2>
        
         <p><strong>Shop for loyalty points and rewards,</strong> Earn points with every purchase and unlock exclusive benefits.</p>
-        <p class="status open">Available</p>
+       <!-- <p class="status open">Available</p> -->
+        <p class="status closed">Coming soon</p>
 
         <button class="rewards-button" @click="registerForRewards()">
           Shop For Rewards

@@ -9,10 +9,9 @@
         {{ store.name }}
       </h2>
       <p><strong>Address:</strong> {{ store.address }}</p>
-      <p><strong>Hours:</strong> {{ store.hours }}</p>
-      <p v-if="store.isOpen" class="status open">Status: Open Now</p>
+      <p v-if="store.isOpen" class="status open">Available</p>
       <p v-else class="status closed">Status: Closed</p>
-      <p v-if="store.hasLoyaltyProgram">Rewards Program: Available</p>
+      <p v-if="store.hasLoyaltyProgram">Rewards Program</p>
       <button
         class="rewards-button"
         :disabled="store.comingSoon"
@@ -70,73 +69,95 @@
   
   <style scoped>
     /* Store List */
-    .store-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-  }
-
-  .store-icon {
+    .store-icon {
   width: 32px;
   height: 32px;
   margin-right: 8px;
   vertical-align: middle;
 }
+
+    .store-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
   
   /* Store Card */
   .store-card {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 15px;
-    background-color: var(--card-background);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .store-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .store-card h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-  }
-  
-  .store-card p {
-    margin: 5px 0;
-    color: var(--secondary-color);
-  }
-  
-  .store-card .status {
-    font-weight: bold;
-  }
-  
-  .store-card .status.open {
-    color: green;
-  }
-  
-  .store-card .status.closed {
-    color: red;
-  }
-  
-  .store-card button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .store-card button:hover {
-    background-color: var(--primary-hover);
-  }
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 10px;
+  padding: 20px;
+  background-color: var(--card-background, #fff);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.store-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.store-card h2 {
+  margin: 0 0 12px;
+  color: #3c336b;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.store-card p {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 16px;
+  margin: 4px 4px 0 0;
+  font-size: 0.875rem;
+  background-color: #f0f0f0;
+  color: var(--secondary-color, #555);
+  line-height: 1.5;
+}
+
+/* Specific chip style for status elements */
+.store-card .status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-weight: bold;
+  margin: 10px 4px 10px 0;
+  font-size: 0.875rem;
+  background-color: #f0f0f0;
+}
+
+/* Open status chip */
+.store-card .status.open {
+  background-color: #e6f9ee; /* light green background */
+  color: var(--success-color, #28a745);
+}
+
+/* Closed status chip */
+.store-card .status.closed {
+  background-color: #ffe6e6; /* light red background */
+  color: var(--danger-color, #dc3545);
+}
+
+.store-card button {
+  align-self: flex-start;
+  margin-top: 10px;
+  padding: 10px 25px;
+  background-color: #3c336b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.store-card button:hover {
+  background-color: var(--primary-hover, #0056b3);
+  transform: scale(1.02);
+}
   
   /* No Results */
   .no-results {

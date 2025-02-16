@@ -5,8 +5,40 @@
       <Ads></Ads>
   
       <IconGrid></IconGrid>
+
+      <div
+    class="find-store-card"
+    @click="handleCardClick"
+    role="button"
+    aria-label="Find store nearby"
+  >
+    <div class="content">
+      <div class="icon-wrapper">
+        <!-- Replace with your actual icon/image -->
+        <img
+          src="../assets/compass.gif"
+          alt="Blueberry with glasses"
+          class="store-icon"
+        />
+      </div>
+      <div class="text-wrapper">
+        <p class="card-title">Find store nearby</p>
+        <p class="card-subtitle">Discover more stores in your area</p>
+      </div>
+    </div>
+    <div class="arrow-wrapper">
+      <!-- Simple arrow icon (you can swap for a custom icon or use an icon library) -->
+      <svg
+        class="arrow-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+      >
+        <path d="M13.17 12l-4.88-4.88a1 1 0 0 1 1.42-1.42l6.59 6.59a1 1 0 0 1 0 1.42l-6.59 6.59a1 1 0 0 1-1.42-1.42L13.17 12z" />
+      </svg>
+    </div>
+  </div>
       
-      <!-- Search Bar -->
+      <!-- Search Bar --
       <div class="search-bar">
         <input
           type="text"
@@ -15,7 +47,7 @@
           @keyup="filterStores"
         />
         <button @click="toggleFilters"><img src="../assets/filter.svg"></button>
-      </div>
+      </div> -->
   
       <!-- Filters -->
       <transition name="fade">
@@ -122,6 +154,9 @@
 
         </div>
       </div>
+    </div>
+    <div class="page-end-container">
+
     </div>
     <BottomNav
       :navItems="navItems"
@@ -234,6 +269,12 @@ import Ads from "../components/Ads.vue"
         // Implement navigation or further actions here
       };
 
+      const handleCardClick= ()=> {
+      // For now, this is just a placeholder.
+      // In the future, you can open a modal or navigate to a store-search page here.
+      console.log("FindStoreNearbyCard clicked");
+    }
+
        const contactSupport = () => {
         router.push('/coming-soon');
         // Implement navigation or further actions here
@@ -270,6 +311,7 @@ import Ads from "../components/Ads.vue"
         navItems,
         discoverIcon,
         storeIcon,
+        handleCardClick
 
       };
     },
@@ -482,6 +524,108 @@ import Ads from "../components/Ads.vue"
 
 .see-all-label{
   color:black;
+}
+
+.find-store-card {
+  position: relative; /* needed for the overlay to be positioned absolutely */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Replace the path below with your actual Google Maps image */
+  background: url("../assets/maps.png") no-repeat center center;
+  background-size: cover;
+  border-radius: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  overflow: hidden; /* so the overlay doesn't spill out of the card */
+  margin-bottom: 10px;
+}
+
+.find-store-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* The gradient overlay that sits above the background image but behind content */
+.overlay {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(240, 249, 255, 0.6), rgba(207, 239, 253, 0.6));
+  /* Adjust the opacity as needed for readability */
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  /* Keep content above the overlay */
+  position: relative;
+  z-index: 1;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color:transparent;
+}
+
+.store-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.page-end-container{
+  height: 70px;
+}
+
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.card-subtitle {
+  font-size: 0.875rem; /* 14px */
+  color: #555;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+.arrow-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16px;
+  position: relative;
+  z-index: 1; /* ensure arrow is above the overlay */
+}
+
+.arrow-icon {
+  width: 24px;
+  height: 24px;
+  fill: #333;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Subtle arrow nudge on hover */
+.find-store-card:hover .arrow-icon {
+  transform: translateX(2px);
 }
   </style>
   

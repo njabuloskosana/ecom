@@ -3,6 +3,13 @@
     <div v-for="(item, index) in items" :key="index" class="icon-item">
       <div class="icon-circle">
         <img :src="item.iconSrc" :alt="item.label" class="icon-img" />
+        <!-- Conditionally render the earn icon image if the path exists -->
+        <img
+          v-if="item.earn"
+          :src="item.earn"
+          alt="Earn Icon"
+          class="earn-icon"
+        />
       </div>
       <p class="icon-label">{{ item.label }}</p>
     </div>
@@ -11,20 +18,22 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import addBusiness from "../assets/add_business.svg"
-import surveyIcon from "../assets/survey.svg"
-import qrScanner from "../assets/qrscanner.svg"
-import buyPoints from "../assets/buy.svg"
-import inviteFriends from "../assets/invite.svg"
-import cashPoints from "../assets/payment.svg"
+import addBusiness from "../assets/add_business.svg";
+import surveyIcon from "../assets/survey.svg";
+import qrScanner from "../assets/qrscanner.svg";
+import buyPoints from "../assets/buy.svg";
+import inviteFriends from "../assets/invite.svg";
+import cashPoints from "../assets/payment.svg";
+// Your custom earn icon path
+import earnIcon from "../assets/rand_paper.png";
 
 const items = ref([
-  { label: "Invite Business", iconSrc: addBusiness },
-  { label: "Survey", iconSrc: surveyIcon },
-  { label: "Scan QR Code", iconSrc: qrScanner },
-  { label: "Buy Points", iconSrc: buyPoints },
-  { label: "Invite Friends", iconSrc:inviteFriends },
-  { label: "Cashing Points", iconSrc: cashPoints },
+  { label: "Invite Business", iconSrc: addBusiness, earn: earnIcon },
+  { label: "Survey", iconSrc: surveyIcon, earn: earnIcon },
+  { label: "Scan QR Code", iconSrc: qrScanner, earn: "" },
+  { label: "Buy Points", iconSrc: buyPoints, earn: "" },
+  { label: "Invite Friends", iconSrc: inviteFriends, earn: earnIcon },
+  { label: "Cashing Points", iconSrc: cashPoints, earn: "" },
 ]);
 </script>
 
@@ -65,6 +74,7 @@ const items = ref([
 
 /* Circular Icon Background */
 .icon-circle {
+  position: relative;
   width: 80px;
   height: 80px;
   background: #fff;
@@ -86,6 +96,20 @@ const items = ref([
   width: 40px;
   height: 40px;
   object-fit: contain;
+}
+
+/* Earn Icon (Small Image at Top Right) */
+.earn-icon {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 27px;
+  height: 27px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  padding: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Label Below Icons */

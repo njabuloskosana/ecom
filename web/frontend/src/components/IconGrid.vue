@@ -23,7 +23,7 @@ import surveyIcon from "../assets/survey.svg";
 import qrScanner from "../assets/qrscanner.svg";
 import buyPoints from "../assets/buy.svg";
 import inviteFriends from "../assets/invite.svg";
-import cashPoints from "../assets/payment.svg";
+import phone from "../assets/phone.svg";
 // Your custom earn icon path
 import earnIcon from "../assets/rand_paper.png";
 
@@ -33,7 +33,7 @@ const items = ref([
   { label: "Scan QR Code", iconSrc: qrScanner, earn: "" },
   { label: "Buy Points", iconSrc: buyPoints, earn: "" },
   { label: "Invite Friends", iconSrc: inviteFriends, earn: earnIcon },
-  { label: "Cashing Points", iconSrc: cashPoints, earn: "" },
+  { label: "Social Media", iconSrc: phone, earn: earnIcon },
 ]);
 </script>
 

@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import recieptIcon from "../assets/reciept.svg"
+import addBusiness from "../assets/add_business.svg"
 import surveyIcon from "../assets/survey.svg"
 import qrScanner from "../assets/qrscanner.svg"
 import buyPoints from "../assets/buy.svg"
@@ -19,7 +19,7 @@ import inviteFriends from "../assets/invite.svg"
 import cashPoints from "../assets/payment.svg"
 
 const items = ref([
-  { label: "Receipt Photo", iconSrc: recieptIcon },
+  { label: "Invite Business", iconSrc: addBusiness },
   { label: "Survey", iconSrc: surveyIcon },
   { label: "Scan QR Code", iconSrc: qrScanner },
   { label: "Buy Points", iconSrc: buyPoints },

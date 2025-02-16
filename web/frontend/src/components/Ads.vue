@@ -69,7 +69,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 300px; /* Adjust this based on your preferred height */
+  height: 250px; /* Adjust this based on your preferred height */
   overflow: hidden;
 }
 

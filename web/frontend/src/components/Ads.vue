@@ -74,10 +74,9 @@ onUnmounted(() => {
 }
 
 .carousel-image {
-  width: auto;
-  max-width: 100%;
+  width: 100%;
   height: 100%;
-  object-fit: contain; /* Use 'cover' if you want it to fill the space */
+  object-fit: fill; /* Use 'cover' if you want it to fill the space */
 }
 
 /* Indicators */

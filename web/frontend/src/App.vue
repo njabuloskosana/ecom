@@ -1,151 +1,181 @@
 <template>
-  <div id="app">
-    <div class="app-heading">Cyber Spaza</div>
-    <ProductList :products="products" />
+  <div class="app">
+    <div class="container">
+      <h1>Join RideWise Connect</h1>
+      <p class="tagline">Connecting quality drivers with bike fleet owners across South Africa</p>
+      
+      <TabSelector v-model:selectedTab="selectedTab" />
+      
+      <transition name="fade" mode="out-in">
+        <DriverForm v-if="selectedTab === 'driver'" />
+        <BikeOwnerForm v-else />
+      </transition>
+    </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import ProductList from './components/ProductList.vue';
-import axios from 'axios';
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+import TabSelector from './components/TabSelector.vue';
+import DriverForm from './components/DriverForm.vue';
+import BikeOwnerForm from './components/BikeOwnerForm.vue';
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  quantity: number;
-  created_time: string;
-  price: number;
-}
-
-const products = ref<Product[]>([]);
-const url = 'http://localhost:8080/api/v1/products';
-
-const fetchProducts = async () => {
-  try {
-    const response = await axios.get<Product[]>(url);
-    products.value = response.data;
-    console.log('Fetched products:', products.value);
-  } catch (error) {
-    console.error('Failed to fetch products', error);
+export default defineComponent({
+  name: 'App',
+  components: {
+    TabSelector,
+    DriverForm,
+    BikeOwnerForm
+  },
+  setup() {
+    const selectedTab = ref('bikeOwner');
+    
+    return {
+      selectedTab
+    };
   }
-};
-
-onMounted(fetchProducts);
+});
 </script>
 
-<!-- Global styles (not scoped) -->
 <style>
-html, body {
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  width: 100%;
-  background-color: #fafafa;
-  font-family: "Helvetica Neue", Avenir, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-image: url('../src/assets/cyberstorebackground.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center center;
+  font-family: Arial, sans-serif;
 }
 
-body {
-  margin-left: 0;
+.app {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.tagline {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
   margin-bottom: 0;
 }
-</style>
 
-<!-- Component-scoped styles -->
-<style scoped>
-#app {
-  display: flex;
-  flex-direction: column;
-  width: 100vw !important;
-  background-color: transparent !important;
-  position: relative;
-  padding: 20px !important;
+.form-row .form-group {
+  flex: 1;
 }
 
-.app-heading {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 3rem;
-  color: #8afc7e; /* neon accent color from your existing design */
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-align: center;
-  margin: 40px 0;
-  position: relative;
-  overflow: hidden;
-  /* Neon glow */
-  text-shadow: 0 0 5px #8afc7e, 0 0 10px #8afc7e, 0 0 20px #8afc7e, 0 0 40px #8afc7e;
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
 }
 
-/* Add a subtle "scanline" effect via a pseudo-element overlay */
-.app-heading::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
+input, select {
   width: 100%;
-  height: 100%;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 2%,
-    rgba(255, 255, 255, 0.02) 2.5%,
-    transparent 3%
-  );
-  pointer-events: none;
-  animation: scan 5s linear infinite;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
-/* Subtle glitch effect using pseudo-elements */
-.app-heading::after {
-  content: "Cyber Spaza";
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #8afc7e;
-  opacity: 0.7;
-  text-shadow: 0 0 5px #8afc7e, 0 0 10px #8afc7e;
-  clip: rect(0, 0, 0, 0);
-  animation: glitch 2s infinite;
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
 }
 
-/* Keyframes for the scanline overlay */
-@keyframes scan {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 100%; }
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0d2241;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-/* Keyframes for a gentle glitch effect */
-@keyframes glitch {
-  0% {
-    clip: rect(0, 0, 0, 0);
-  }
-  10% {
-    clip: rect(0, 1000px, 0, 0);
-    transform: translate(-5px, -2px);
-  }
-  20% {
-    clip: rect(0, 0, 1000px, 0);
-    transform: translate(5px, 2px);
-  }
-  30% {
-    clip: rect(0, 1000px, 1000px, 0);
-    transform: translate(-2px, -1px);
-  }
-  40% {
-    clip: rect(0, 0, 0, 0);
-    transform: translate(2px, 1px);
-  }
-  100% {
-    clip: rect(0, 0, 0, 0);
-    transform: translate(0,0);
-  }
+.submit-button:hover {
+  background-color: #0a1a33;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.login-link a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

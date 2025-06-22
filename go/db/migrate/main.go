@@ -27,7 +27,7 @@ func main() {
 		Host:     configs.Envs.MigrationHost,
 		Port:     mustConvertToInt(configs.Envs.MigrationPort), // PostgreSQL default port
 		DBName:   configs.Envs.DBName,
-		SSLMode:  "disable", // Adjust based on your environment
+		SSLMode:  "require", // Adjust based on your environment
 	}
 	dbConn, err := db.NewPgStorage(cfg)
 	if err != nil {

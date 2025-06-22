@@ -5,35 +5,23 @@ services:
     build:
       context: ./go/api
       dockerfile: Dockerfile
-    environment:
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASSWORD=0845635040
-      - DB_NAME=postgres
+    env_file:
+      - .env
     ports:
       - "8080:8080"
-    depends_on:
-      - db
     networks:
-      - ecom-network
+      - quote-my-move
 
   worker:
     build:
       context: ./go/worker
       dockerfile: Dockerfile
-    environment:
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASSWORD=0845635040
-      - DB_NAME=postgres
+    env_file:
+      - .env
     ports:
       - "8081:8081"
-    depends_on:
-      - db
     networks:
-      - ecom-network
+      - quote-my-move
 
   ui:
     build:
@@ -42,20 +30,9 @@ services:
     ports:
       - "80:80"
     networks:
-      - ecom-network
-
-  db:
-    image: postgres:14
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 0845635040
-      POSTGRES_DB: postgres
-    ports:
-      - "5435:5432"
-    networks:
-      - ecom-network
+      - quote-my-move
 
 networks:
-  ecom-network:
+  quote-my-move:
     driver: bridge
 

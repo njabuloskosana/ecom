@@ -31,7 +31,7 @@ func initConfig() Config {
 	log.Println(".env file found")
 	return Config{
 		PublicHost:             getEnv("PUBLIC_HOST", ""),
-		Port:                   getEnv("PORT", ""),
+		Port:                   getEnv("DB_PORT", ""),
 		DbUser:                 getEnv("DB_USER", ""),
 		DBPassword:             getEnv("DB_PASSWORD", ""),
 		DBAddress:              getEnv("DB_HOST", ""), // PostgreSQL default port

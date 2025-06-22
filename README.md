@@ -270,6 +270,7 @@ For questions or support, contact the engineering team via internal channels or 
     make migrate-up
     make run
     pg_restore -h localhost -p 5433 -U postgres -d postgres -W -v <file_name.mimetype>
+    docker run --name quote-my-move -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=0845635040 -e POSTGRES_DB=quotemymove -p 5435:5432 -d postgres:17
     ```
 
 **Note**: Check how Docker allows you to run everything on one network.
